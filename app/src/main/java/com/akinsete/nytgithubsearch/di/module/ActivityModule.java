@@ -6,6 +6,7 @@ import com.akinsete.nytgithubsearch.di.ActivityContext;
 import com.akinsete.nytgithubsearch.di.PerActivity;
 import com.akinsete.nytgithubsearch.navigator.Navigator;
 import com.akinsete.nytgithubsearch.ui.search.SearchContract;
+import com.akinsete.nytgithubsearch.ui.search.SearchInteractor;
 import com.akinsete.nytgithubsearch.ui.search.SearchPresenter;
 import com.akinsete.nytgithubsearch.uitls.rx.AppSchedulerProvider;
 import com.akinsete.nytgithubsearch.uitls.rx.SchedulerProvider;
@@ -59,6 +60,12 @@ public class ActivityModule {
     SearchContract.Presenter<SearchContract.View, SearchContract.Interactor> provideSearchPresenter(
             SearchPresenter<SearchContract.View, SearchContract.Interactor> presenter) {
         return presenter;
+    }
+    
+    @Provides
+    @PerActivity
+    SearchContract.Interactor provideSearchContractInteractor(SearchInteractor interactor) {
+        return interactor;
     }
 
 }

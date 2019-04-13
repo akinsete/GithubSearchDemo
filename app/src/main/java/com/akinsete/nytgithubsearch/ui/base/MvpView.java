@@ -9,6 +9,8 @@ public interface MvpView {
 
     void hideLoading();
 
+    void showError(String message);
+
     void onError(String message);
 
 }

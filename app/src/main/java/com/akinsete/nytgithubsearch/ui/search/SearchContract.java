@@ -18,7 +18,9 @@ public interface SearchContract {
 
     interface View extends MvpView {
 
-        void displaySaearchResult(List<SearchResult> searchResult);
+        void showEmptySearchError();
+
+        void displaySearchResult(List<SearchResult> searchResult);
 
     }
 
