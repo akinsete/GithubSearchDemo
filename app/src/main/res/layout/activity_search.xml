@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_weight="7"
             android:hint="@string/enter_organisation_name"
-            android:background="@drawable/default_edit_text"
+            android:background="@drawable/bordered_bg"
             android:padding="@dimen/edit_text_padding"
             android:layout_height="@dimen/edit_text_height"
             android:layout_gravity="center_vertical"

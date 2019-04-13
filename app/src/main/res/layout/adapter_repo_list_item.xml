@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/small_box_size">
+
+    <ImageView
+        android:layout_alignParentStart="true"
+        android:id="@+id/img_repo_owner_avatar"
+        android:layout_width="@dimen/image_avatar_size"
+        android:layout_height="@dimen/image_avatar_size"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="@dimen/app_padding_ex_small"
+        android:layout_marginEnd="@dimen/app_padding_small"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bordered_bg"
+        tools:ignore="ContentDescription" />
+
+
+    <TextView
+        android:layout_toEndOf="@id/img_repo_owner_avatar"
+        android:id="@+id/tv_repo_name"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_padding"
+        android:layout_toStartOf="@+id/tv_stars"/>
+
+    <TextView
+        android:layout_toEndOf="@id/img_repo_owner_avatar"
+        android:id="@+id/tv_repo_description"
+        android:layout_width="wrap_content"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@id/tv_repo_name"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_padding_small"
+        android:layout_toStartOf="@+id/tv_stars"/>
+
+    <TextView
+        android:id="@+id/tv_stars"
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"
+        android:drawableTop="@drawable/ic_stars"
+        android:text="@string/star_count"
+        android:textSize="@dimen/text_star_size"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="@dimen/medium_box_size"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

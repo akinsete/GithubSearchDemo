@@ -82,7 +82,7 @@ public class BasePresenter<V extends MvpView, I extends MvpInteractor>
             ResponseBody errorBody = b.response().errorBody();
 
             if (errorBody != null) {
-                /// Try to parse github custom error message
+                /// Trying to parse github custom error message
                 try {
                     String error = errorBody.string();
                     GithubErrorResponse githubErrorResponse = new Gson().fromJson(error,

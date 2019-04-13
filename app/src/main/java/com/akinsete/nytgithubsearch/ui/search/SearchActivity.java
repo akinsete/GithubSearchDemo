@@ -9,7 +9,12 @@ import com.akinsete.nytgithubsearch.R;
 import com.akinsete.nytgithubsearch.data.network.model.responses.Repo;
 import com.akinsete.nytgithubsearch.ui.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,6 +27,10 @@ import javax.inject.Inject;
     SearchContract.Presenter<SearchContract.View, SearchContract.Interactor> mSearchPresenter;
 
     @BindView(R.id.et_search) EditText editTextSearch;
+    @BindView(R.id.search_recycler_view) RecyclerView recyclerViewSearch;
+
+    private RepoListAdapter mRepoListAdapter;
+    private List<Repo> mRepos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +42,34 @@ import javax.inject.Inject;
 
         ButterKnife.bind(this);
 
+        setupRecyclerView();
+
         mSearchPresenter.onAttach(this);
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
     }
 
+    private void setupRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        mRepoListAdapter = new RepoListAdapter(mRepos, url -> {
+            mNavigator.openRepoUrl(this, url);
+        });
+
+        recyclerViewSearch.setLayoutManager(linearLayoutManager);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerViewSearch.getContext(),
+                linearLayoutManager.getOrientation());
+        recyclerViewSearch.addItemDecoration(itemDecoration);
+        recyclerViewSearch.setAdapter(mRepoListAdapter);
+    }
+
     @OnClick(R.id.btn_search)
     public void btnSearchClicked(){
+        mRepoListAdapter.resetData();
         mSearchPresenter.searchRepository(editTextSearch.getText().toString());
     }
 
@@ -59,11 +86,8 @@ import javax.inject.Inject;
     @Override
     public void displaySearchResult(List<Repo> repos) {
         hideKeyboard(this.getCurrentFocus());
-
-        Log.i("displaySearchResult", String.valueOf(repos));
+        mRepoListAdapter.updateData(repos);
     }
-
-
 
     @Override
     protected void onDestroy() {
