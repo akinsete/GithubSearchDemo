@@ -2,19 +2,21 @@ package com.akinsete.nytgithubsearch.ui.search;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.akinsete.nytgithubsearch.R;
-import com.akinsete.nytgithubsearch.data.network.model.responses.SearchResult;
+import com.akinsete.nytgithubsearch.data.network.model.responses.Repo;
 import com.akinsete.nytgithubsearch.ui.base.BaseActivity;
 
 import java.util.List;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import javax.inject.Inject;
 
-public class SearchActivity extends BaseActivity implements SearchContract.View {
+    public class SearchActivity extends BaseActivity implements SearchContract.View {
 
     @Inject
     SearchContract.Presenter<SearchContract.View, SearchContract.Interactor> mSearchPresenter;
@@ -29,6 +31,8 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
 
         getActivityComponent().inject(this);
 
+        ButterKnife.bind(this);
+
         mSearchPresenter.onAttach(this);
     }
 
@@ -37,20 +41,29 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
         super.onResume();
     }
 
-    @OnClick
+    @OnClick(R.id.btn_search)
     public void btnSearchClicked(){
         mSearchPresenter.searchRepository(editTextSearch.getText().toString());
     }
 
     @Override
-    public void showEmptySearchError() {
+    public void showEmptySearchQueryError() {
         showError(getString(R.string.empty_org_error));
     }
 
     @Override
-    public void displaySearchResult(List<SearchResult> searchResult) {
-
+    public void showEmptySearchResultError() {
+        showError(getString(R.string.empty_search_result) + editTextSearch.getText().toString());
     }
+
+    @Override
+    public void displaySearchResult(List<Repo> repos) {
+        hideKeyboard(this.getCurrentFocus());
+
+        Log.i("displaySearchResult", String.valueOf(repos));
+    }
+
+
 
     @Override
     protected void onDestroy() {

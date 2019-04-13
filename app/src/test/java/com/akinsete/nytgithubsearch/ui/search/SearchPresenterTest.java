@@ -51,10 +51,11 @@ public class SearchPresenterTest {
     @Test
     public void searchRepositoryByOrganisation() {
         String searchQuery = "apple";
+        int limit = 3;
 
         SearchResponse searchResponse = new SearchResponse();
 
-        when(mMockSearchInteractor.doSearchRepositoryByOrganisation(searchQuery))
+        when(mMockSearchInteractor.doSearchRepositoryByOrganisation(searchQuery, limit))
                 .thenReturn(Observable.just(searchResponse));
 
         mSearchPresenter.searchRepository(searchQuery);

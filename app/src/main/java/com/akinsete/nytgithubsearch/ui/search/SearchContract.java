@@ -1,7 +1,7 @@
 package com.akinsete.nytgithubsearch.ui.search;
 
+import com.akinsete.nytgithubsearch.data.network.model.responses.Repo;
 import com.akinsete.nytgithubsearch.data.network.model.responses.SearchResponse;
-import com.akinsete.nytgithubsearch.data.network.model.responses.SearchResult;
 import com.akinsete.nytgithubsearch.di.PerActivity;
 import com.akinsete.nytgithubsearch.ui.base.MvpInteractor;
 import com.akinsete.nytgithubsearch.ui.base.MvpPresenter;
@@ -18,10 +18,11 @@ public interface SearchContract {
 
     interface View extends MvpView {
 
-        void showEmptySearchError();
+        void showEmptySearchQueryError();
 
-        void displaySearchResult(List<SearchResult> searchResult);
+        void displaySearchResult(List<Repo> searchResult);
 
+        void showEmptySearchResultError();
     }
 
     @PerActivity
@@ -34,6 +35,6 @@ public interface SearchContract {
 
     interface Interactor extends MvpInteractor {
 
-        Observable<SearchResponse> doSearchRepositoryByOrganisation(String organisationName);
+        Observable<SearchResponse> doSearchRepositoryByOrganisation(String organisationName, int limit);
     }
 }

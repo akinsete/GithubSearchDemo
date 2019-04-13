@@ -3,4 +3,5 @@
     <string name="enter_organisation_name">Enter organisation name</string>
     <string name="search">Search</string>
     <string name="empty_org_error">Enter organisation name to begin search</string>
+    <string name="empty_search_result">No organisation was found with the name</string>
 </resources>

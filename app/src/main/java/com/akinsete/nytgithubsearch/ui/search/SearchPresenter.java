@@ -1,8 +1,11 @@
 package com.akinsete.nytgithubsearch.ui.search;
 
+import com.akinsete.nytgithubsearch.data.network.model.responses.Repo;
 import com.akinsete.nytgithubsearch.data.network.model.responses.SearchResponse;
 import com.akinsete.nytgithubsearch.ui.base.BasePresenter;
 import com.akinsete.nytgithubsearch.uitls.rx.SchedulerProvider;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,14 +27,14 @@ public class SearchPresenter<V extends SearchContract.View, I extends SearchCont
     public void searchRepository(String organisationName) {
 
         if (organisationName == null || organisationName.isEmpty()) {
-            getMvpView().showEmptySearchError();
+            getMvpView().showEmptySearchQueryError();
             return;
         }
 
         getMvpView().showLoading();
 
         getCompositeDisposable().add(getInteractor()
-                .doSearchRepositoryByOrganisation(organisationName)
+                .doSearchRepositoryByOrganisation(organisationName, 3)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(searchResponse -> {
@@ -42,7 +45,7 @@ public class SearchPresenter<V extends SearchContract.View, I extends SearchCont
 
                     getMvpView().hideLoading();
 
-                    getMvpView().displaySearchResult(null);
+                    getMvpView().displaySearchResult(searchResponse.getRepos());
 
                 }, this::handleServerError)
         );

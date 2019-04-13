@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.akinsete.nytgithubsearch.R;
 
@@ -27,5 +29,14 @@ public final class CommonUtils {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
+    }
+    
+    public static void hideKeyboard(Context context, View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 }

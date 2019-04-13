@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.akinsete.nytgithubsearch">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".di.GithubApplication"
         android:allowBackup="true"

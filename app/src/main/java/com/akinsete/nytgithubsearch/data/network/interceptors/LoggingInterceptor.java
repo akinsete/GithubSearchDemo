@@ -34,11 +34,6 @@ public class LoggingInterceptor implements Interceptor {
         Log.i(mTag, String.format("Sending request %s %s on %s%n%s%n",
                 request.method(), request.url(), chain.connection(), request.headers()));
 
-        if (buffer.size() >= 10000 && request.method().equals("PUT")) {
-            Log.v(mTag, "Message larger than 10KB");
-        } else {
-            Log.v(mTag, buffer.readUtf8());
-        }
 
         Response response = chain.proceed(request);
 

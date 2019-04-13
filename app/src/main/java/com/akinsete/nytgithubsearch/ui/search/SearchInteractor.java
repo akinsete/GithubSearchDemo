@@ -19,7 +19,10 @@ public class SearchInteractor extends BaseInteractor implements SearchContract.I
     }
 
     @Override
-    public Observable<SearchResponse> doSearchRepositoryByOrganisation(String organisationName) {
-        return getGithubApiHelper().searchByOrganisation(organisationName);
+    public Observable<SearchResponse> doSearchRepositoryByOrganisation(String organisation, int limit) {
+        String sort = "stars";
+        String order = "desc";
+        organisation = "org:" + organisation;
+        return getGithubApiHelper().searchByOrganisation(organisation, sort, order, limit);
     }
 }

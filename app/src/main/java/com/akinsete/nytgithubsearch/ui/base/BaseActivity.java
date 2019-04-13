@@ -75,6 +75,13 @@ public class BaseActivity extends AppCompatActivity implements MvpView {
         showSnackBar(message);
     }
 
+    protected void hideKeyboard(View view) {
+        if (view == null) {
+            return;
+        }
+        CommonUtils.hideKeyboard(this, view);
+    }
+
     private void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_SHORT);
