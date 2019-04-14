@@ -1,6 +1,8 @@
 package com.akinsete.nytgithubsearch.ui.search;
 
 
+import android.content.Intent;
+
 import com.akinsete.nytgithubsearch.R;
 import com.akinsete.nytgithubsearch.TestComponentRule;
 
@@ -15,12 +17,15 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -32,6 +37,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.akinsete.nytgithubsearch.customassertions.AssertionUtils.clickChildViewWithId;
 import static com.akinsete.nytgithubsearch.customassertions.AssertionUtils.waitFor;
 import static com.akinsete.nytgithubsearch.customassertions.RecyclerViewItemCountAssertion.withItemCount;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 
@@ -89,6 +95,7 @@ public class SearchActivityTest {
     @Test
     public void ensureRecyclerViewIsPopulatedWithResults() {
         startSearchingByApple("github");
+        onView(isRoot()).perform(waitFor(5000));
         onView(withId(R.id.search_recycler_view)).check(withItemCount(lessThanOrEqualTo(3)));
     }
 
@@ -96,8 +103,14 @@ public class SearchActivityTest {
     @Test
     public void ensureRecyclerViewItemCanBeClicked(){
         startSearchingByApple("nytimes");
+        onView(isRoot()).perform(waitFor(5000));
         onView(withId(R.id.search_recycler_view)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, clickChildViewWithId(R.id.recycler_parent_layout)));
+
+        intended(allOf(
+                hasAction(Intent.ACTION_VIEW),
+                hasExtra("android.support.customtabs.extra.TITLE_VISIBILITY", 1)
+        ));
     }
 
 
@@ -106,7 +119,6 @@ public class SearchActivityTest {
         onView(withId(R.id.et_search)).perform(ViewActions.clearText())
                 .perform(ViewActions.typeText(orgName),closeSoftKeyboard());
         onView(withId(R.id.btn_search)).perform(click());
-        onView(isRoot()).perform(waitFor(5000));
     }
 
 

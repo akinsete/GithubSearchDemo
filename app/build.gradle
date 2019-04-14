@@ -44,7 +44,7 @@ ext {
     espressoVersion = '3.2.0-alpha03'
     junitVersion = '4.12'
     mockitoVersion = '2.7.1'
-    testRunner = '1.2.0-alpha3'
+    testRunner = '1.1.0'
 
 }
 
@@ -75,7 +75,7 @@ dependencies {
 
 
     testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test:runner:$testRunner"
+    androidTestImplementation "androidx.test.ext:junit:$testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
