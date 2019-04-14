@@ -27,7 +27,7 @@ public interface SearchContract {
     interface Presenter<V extends SearchContract.View,
             I extends SearchContract.Interactor> extends MvpPresenter<V, I> {
 
-        void searchRepository(String organisationName);
+        void searchRepositoryByOrganisation(String organisationName);
     }
 
 

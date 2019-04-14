@@ -71,7 +71,7 @@ import javax.inject.Inject;
     @OnClick(R.id.btn_search)
     public void btnSearchClicked(){
         mRepoListAdapter.resetData();
-        mSearchPresenter.searchRepository(editTextSearch.getText().toString());
+        mSearchPresenter.searchRepositoryByOrganisation(editTextSearch.getText().toString());
     }
 
     @Override
@@ -90,8 +90,8 @@ import javax.inject.Inject;
         mSearchPresenter.onDetach();
         super.onDestroy();
     }
-
-    public static Intent getSearchActivityIntent(Context context) {
-        return new Intent(context, SearchActivity.class);
-    }
+//
+//    public static Intent getSearchActivityIntent(Context context) {
+//        return new Intent(context, SearchActivity.class);
+//    }
 }

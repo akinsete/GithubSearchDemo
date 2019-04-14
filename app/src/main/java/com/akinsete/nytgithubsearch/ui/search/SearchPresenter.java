@@ -1,12 +1,7 @@
 package com.akinsete.nytgithubsearch.ui.search;
 
-import com.akinsete.nytgithubsearch.data.network.model.responses.Repo;
-import com.akinsete.nytgithubsearch.data.network.model.responses.SearchResponse;
 import com.akinsete.nytgithubsearch.ui.base.BasePresenter;
 import com.akinsete.nytgithubsearch.uitls.rx.SchedulerProvider;
-
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -24,7 +19,7 @@ public class SearchPresenter<V extends SearchContract.View, I extends SearchCont
     }
 
     @Override
-    public void searchRepository(String organisationName) {
+    public void searchRepositoryByOrganisation(String organisationName) {
 
         if (organisationName == null || organisationName.isEmpty()) {
             getMvpView().showEmptySearchQueryError();

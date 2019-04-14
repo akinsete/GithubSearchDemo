@@ -58,7 +58,7 @@ public class SearchPresenterTest {
         when(mMockSearchInteractor.doSearchRepositoryByOrganisation(searchQuery, limit))
                 .thenReturn(Observable.just(searchResponse));
 
-        mSearchPresenter.searchRepository(searchQuery);
+        mSearchPresenter.searchRepositoryByOrganisation(searchQuery);
 
         mTestScheduler.triggerActions();
 
@@ -72,10 +72,8 @@ public class SearchPresenterTest {
     public void searchRepositoryByOrganisationShouldFail(){
         String searchQuery = "";
 
-        mSearchPresenter.searchRepository(searchQuery);
+        mSearchPresenter.searchRepositoryByOrganisation(searchQuery);
 
-
-        verify(mMockSearchView, atLeastOnce()).showEmptySearchError();
 
         verify(mMockSearchView, never()).showLoading();
         verify(mMockSearchView, never()).hideLoading();
