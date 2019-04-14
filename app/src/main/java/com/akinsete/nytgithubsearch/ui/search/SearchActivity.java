@@ -1,8 +1,9 @@
 package com.akinsete.nytgithubsearch.ui.search;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.akinsete.nytgithubsearch.R;
@@ -79,11 +80,6 @@ import javax.inject.Inject;
     }
 
     @Override
-    public void showEmptySearchResultError() {
-        showError(getString(R.string.empty_search_result) + editTextSearch.getText().toString());
-    }
-
-    @Override
     public void displaySearchResult(List<Repo> repos) {
         hideKeyboard(this.getCurrentFocus());
         mRepoListAdapter.updateData(repos);
@@ -95,6 +91,7 @@ import javax.inject.Inject;
         super.onDestroy();
     }
 
-
-
+    public static Intent getSearchActivityIntent(Context context) {
+        return new Intent(context, SearchActivity.class);
+    }
 }

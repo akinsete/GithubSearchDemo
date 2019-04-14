@@ -1,6 +1,5 @@
 package com.akinsete.nytgithubsearch.di.component;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.akinsete.nytgithubsearch.data.network.GithubApiHelper;
@@ -26,7 +25,5 @@ public interface ApplicationComponent {
     @ApplicationContext
     Context context();
 
-    Application application();
-
-    GithubApiHelper gitubApiHelper();
+    GithubApiHelper githubApiHelper();
 }

@@ -21,8 +21,6 @@ public interface SearchContract {
         void showEmptySearchQueryError();
 
         void displaySearchResult(List<Repo> searchResult);
-
-        void showEmptySearchResultError();
     }
 
     @PerActivity
